@@ -1,0 +1,102 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+body{
+  background:url("bg4.jpeg");
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:1px 400px;
+  background-size:380px 500px;
+  background-color: #0d0707;
+}
+#locationForm{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  width:350px;
+}
+#locationForm input{
+  margin-top:20px;
+  font-size:14px;
+  color:gray;
+  font-weight: bold;
+  border:none;
+  border-bottom:1px solid black;
+  background:transparent;
+  color:white;
+  font-weight: bold;
+}
+#locationForm input:focus{
+  outline:none;
+}
+#locationForm input::placeholder{
+  color: silver;
+  text-shadow:0px 3px 5px black;
+}
+.cont{
+  display:flex;
+  flex-direction: column;
+  color:silver;
+  font-weight: bold;
+  text-shadow:0px 2px 5px black;
+  justify-content: center;
+  align-items: center;
+  border:1px solid gray;
+  width:200px;
+  margin-left:25%;
+  margin-top:5%;
+  padding:10px;
+  /*background: rgba(237, 138, 255, 0.2);*/
+  background: transparent;
+  backdrop-filter: blur(2px);
+  border-radius:10%;
+  box-shadow:0 18px 32px 0 rgba(31, 38, 135, 0.37);
+}
+.cont p{
+  font-size:11px;
+}
+#locationForm button{
+  padding:5px 5px;
+  animation:anim 3s infinite;
+  background-color:gray;
+  border:none;
+  border-radius:10%;
+  text-transform: uppercase;
+}
+#locationForm button:active{
+  background-color:green;
+  color:white;
+  transition:1s;
+  box-shadow:0px 2px 50px green;
+}
+@keyframes anim {
+  0% {
+    
+    box-shadow: 10px 10px 20px white;
+  }
+  50% {
+    
+    box-shadow: 20px 20px 20px floralwhite;
+  }
+  100% {
+    
+    box-shadow: 25px 25px 20px whitesmoke;
+  }
+}
+hr{
+  width:180px;
+  background-color:gray;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+#deliveryMessage{
+  color:white;
+  font-weight:bold;
+}
+#locationForm #address{
+  color:silver;
+  text-shadow:0px 2px 5px black;
+}

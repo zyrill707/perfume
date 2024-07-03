@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta property="og:image"
+  content="https://sophiadonuts.netlify.app/bg2.jpeg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Enchanting Elixirs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cont">
+    <a href="https://youtu.be/xvFZjo5PgG0?feature=shared">Products</a>
+    <a href="#">Contact Us</a>
+    <a href="https://youtu.be/xvFZjo5PgG0?feature=shared">About Us</a>
+  </div>
+  <div class="important">
+    <h3>Enchanting </h3>
+  </div>
+  <div class="page1">
+  <div class="content">
+    <img src="perfume/poison.jpeg">
+    <h4>Poision perfume</h4>
+    <del>Price: 150₱</del>
+    <strong>Price: 180₱</strong>
+    <strong>Perfume number: 1</strong>
+    <strong id="avail"></strong>
+    <label>Details:</label>
+    <p>Seductive Smell</p>
+    <p>Long Lasting</p>
+    <p>Oil based</p>
+    <p>100ml</p>
+    <a href="checkout.html"><button onclick="setPerfumeNumber(1)">Check Out</button></a>
+  </div>
+    <div class="content">
+    <img src="perfume/set1.jpg">
+    <h4>Perfume Set</h4>
+    <del>Price: 398₱</del>
+    <strong>Price: 250₱</strong>
+    <strong>Perfume Number: 2</strong>
+    <strong id="avail"></strong>
+    <label>Brands:</label>
+    <p>Poison</p>
+    <p>Sexy Man</p>
+    <a href="checkout.html"><button onclick="setPerfumeNumber(2)">Check Out</button></a>
+  </div>
+  <!--2nd product-->
+  <div class="content">
+    <img src="perfume/brave.jpg">
+    <h4>Brave man perfume</h4>
+    <del>Price: 250₱</del>
+    <strong>Price: 199₱</strong>
+    <strong>Perfume Number: 3</strong>
+    <strong id="avail"></strong>
+    <label>Details:</label>
+    <p>Seductive Smell</p>
+    <p>Oil based</p>
+    <p>Seductive Smell</p>
+    <p>100ml</p>
+    <a href="checkout.html"><button onclick="setPerfumeNumber(3)">Check Out</button></a>
+  </div>
+    <div class="content">
+    <img src="perfume/flame.jpeg">
+    <h4>Vigorus Flame</h4>
+    <del>Price: 1,899₱</del>
+    <strong>Price: 200₱</strong>
+    <strong>Perfume Number: 4</strong>
+    <strong id="out"></strong>
+    <label>Details:</label>
+    <p>Oil Based</p>
+    <p>Signature Scent</p>
+    <p>Better Longevity</p>
+    <p>100ml</p>
+    <a href="checkout.html"><button onclick="setPerfumeNumber(4)">Check Out</button></a>
+  </div>
+  </div>
+  <script>
+    function setPerfumeNumber(perfumeNumber) {
+      localStorage.setItem('perfumeNumber', perfumeNumber);
+    }
+  </script>
+</body>
+</html>
