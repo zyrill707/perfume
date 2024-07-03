@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Out</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="ch.css">
+</head>
+<body>
+  <div id="map"></div>
+  <div class="cont">
+    <h4>Please Fill Up the Form accurately and honestly</h4>
+    <p>Move the map in your exact location</p>
+    <hr>
+    <p><b>Available Location</b> Silay, Talisay, Bacolod, Victorias, Eb mag Delivery fee may vary</p>
+    <form id="locationForm" action="https://formspree.io/f/mldreneq" method="POST">
+      <input placeholder="Address" type="text" id="address" name="address"><br>
+      <input type="text" placeholder="Enter Your Name" name="PersonName">
+      <input placeholder="Enter Phone Number" type="number" name="PhoneNumber" required>
+      <input placeholder="Enter Perfume number" type="number" id="perfumeNumber" name="OrderNumber" required>
+      <input id="quantity" placeholder="Quantity" type="number" name="Quantity" required>
+      <p id="deliveryMessage"></p>
+      <br>
+      <button type="submit">Order</button>
+    </form>
+  </div>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <script>
+  window.alert("Move the map to your exact location. Fee may vary");
+    var platform = new H.service.Platform({
+      'apikey': 'icF6nrsrWyCf-86CM5umPq1MGViDvKk-YkVaqUMxpGE'
+    });
+
+    var defaultLayers = platform.createDefaultLayers();
+    var map = new H.Map(
+      document.getElementById('map'),
+      defaultLayers.raster.satellite.map,
+      {
+        center: { lat: 10.799680, lng: 122.975288 },
+        zoom: 18
+      }
+    );
+
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+    var marker = new H.map.Marker(map.getCenter(), { volatility: true });
+    map.addObject(marker);
+
+    marker.draggable = true;
+
+    function updateAddress(position) {
+      var url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${position.lat},${position.lng}&apiKey=icF6nrsrWyCf-86CM5umPq1MGViDvKk-YkVaqUMxpGE`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.items && data.items.length > 0) {
+            var address = data.items[0].address.label;
+            document.getElementById('address').value = address;
+            checkFreeDelivery(address);
+          } else {
+            console.error('No address found for this location.');
+          }
+        })
+        .catch(error => {
+          console.error('Geocoding error:', error);
+        });
+    }
+
+    function checkFreeDelivery(address) {
+      var quantity = document.getElementById("quantity").value;
+      var message = document.getElementById("deliveryMessage");
+      var isSilay = address.includes("Silay");
+
+      if ((isSilay && quantity >= 2) || (!isSilay && quantity >= 4)) {
+        message.textContent = "Free Delivery Applied ☑";
+      } else {
+        message.textContent = "";
+      }
+    }
+
+    marker.addEventListener('dragend', function(ev) {
+      var position = marker.getGeometry();
+      updateAddress(position);
+    });
+
+    map.addEventListener('dragend', function() {
+      var position = map.getCenter();
+      marker.setGeometry(position);
+      updateAddress(position);
+    });
+
+    map.addEventListener('mapviewchangeend', function() {
+      var position = map.getCenter();
+      marker.setGeometry(position);
+      updateAddress(position);
+    });
+
+    updateAddress(map.getCenter());
+
+    document.getElementById("quantity").addEventListener('input', function() {
+      var address = document.getElementById("address").value;
+      checkFreeDelivery(address);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var perfumeNumber = localStorage.getItem('perfumeNumber');
+      if (perfumeNumber) {
+        document.getElementById('perfumeNumber').value = perfumeNumber;
+      }
+    });
+  </script>
+</body>
+</html>
